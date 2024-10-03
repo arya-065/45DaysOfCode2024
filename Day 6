@@ -1,0 +1,42 @@
+#include <iostream>
+#include <vector>
+#include <string>
+
+std::string convertToZigzag(const std::string& s, int numRows) {
+    if (numRows <= 1 || numRows >= s.size()) {
+        return s; // No zigzag conversion needed
+    }
+
+    std::vector<std::string> rows(std::min(numRows, (int)s.size()));
+    int curRow = 0;
+    bool goingDown = false;
+
+    for (char c : s) {
+        rows[curRow] += c; // Place the character in the current row
+        // Change direction if we're at the top or bottom row
+        if (curRow == 0) {
+            goingDown = true;
+        } else if (curRow == numRows - 1) {
+            goingDown = false;
+        }
+        curRow += goingDown ? 1 : -1; // Move to the next row
+    }
+
+    // Concatenate all rows to get the final zigzag string
+    std::string zigzag;
+    for (const std::string& row : rows) {
+        zigzag += row;
+    }
+
+    return zigzag;
+}
+
+int main() {
+    std::string input = "PAYPALISHIRING";
+    int numRows = 3; // Change this value to set the number of rows
+
+    std::string zigzag = convertToZigzag(input, numRows);
+    std::cout << "Zigzag pattern:\n" << zigzag << std::endl;
+
+    return 0;
+}
