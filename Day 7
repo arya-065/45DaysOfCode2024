@@ -1,0 +1,40 @@
+#include <iostream>
+#include <vector>
+
+bool canJump(const std::vector<int>& nums) {
+    int maxReach = 0;
+    int n = nums.size();
+
+    for (int i = 0; i < n; ++i) {
+        if (i > maxReach) {
+            return false; // We can't reach this index
+        }
+        maxReach = std::max(maxReach, i + nums[i]);
+        if (maxReach >= n - 1) {
+            return true; // We can reach the last index
+        }
+    }
+    return false; // If we finish the loop and haven't reached the last index
+}
+
+int main() {
+    std::vector<int> nums;
+    int n, input;
+
+    std::cout << "Enter the number of elements in the array: ";
+    std::cin >> n;
+
+    std::cout << "Enter the elements of the array: ";
+    for (int i = 0; i < n; ++i) {
+        std::cin >> input;
+        nums.push_back(input);
+    }
+
+    if (canJump(nums)) {
+        std::cout << "You can reach the last index." << std::endl;
+    } else {
+        std::cout << "You cannot reach the last index." << std::endl;
+    }
+
+    return 0;
+}
