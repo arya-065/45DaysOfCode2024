@@ -1,0 +1,28 @@
+#include <iostream>
+#include <algorithm>
+
+int main() {
+    int N, A;
+
+    // Input the total number of people and the number of infected people
+    std::cout << "Enter the total number of people in the city (N): ";
+    std::cin >> N;
+    std::cout << "Enter the number of infected people (A): ";
+    std::cin >> A;
+
+    // Validate input
+    if (N <= 0 || A < 0 || A > N) {
+        std::cout << "Invalid input. Please ensure 0 <= A <= N." << std::endl;
+        return 1;
+    }
+
+    int U = N - A; // Calculate uninfected people
+
+    // Calculate the minimum number of masks required
+    int masksNeeded = std::min(A, U);
+
+    // Output the result
+    std::cout << "Minimum number of people that need to wear masks: " << masksNeeded << std::endl;
+
+    return 0;
+}
