@@ -1,0 +1,47 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+void backtrack(vector<int>& nums, vector<vector<int>>& result, vector<int>& current, vector<bool>& used) {
+    if (current.size() == nums.size()) {
+        result.push_back(current);
+        return;
+    }
+    
+    for (int i = 0; i < nums.size(); i++) {
+        if (used[i]) continue; // Skip used numbers
+        
+        used[i] = true; // Mark the number as used
+        current.push_back(nums[i]); // Add the number to the current permutation
+        
+        backtrack(nums, result, current, used); // Recurse
+        
+        used[i] = false; // Backtrack
+        current.pop_back(); // Remove the number from the current permutation
+    }
+}
+
+vector<vector<int>> permute(vector<int>& nums) {
+    vector<vector<int>> result;
+    vector<int> current;
+    vector<bool> used(nums.size(), false);
+    backtrack(nums, result, current, used);
+    return result;
+}
+
+int main() {
+    vector<int> nums = {1, 2, 3}; // Example input
+    vector<vector<int>> permutations = permute(nums);
+    
+    // Print the result
+    for (const auto& perm : permutations) {
+        cout << "[ ";
+        for (int num : perm) {
+            cout << num << " ";
+        }
+        cout << "]\n";
+    }
+    
+    return 0;
+}
