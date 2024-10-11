@@ -1,0 +1,45 @@
+#include <iostream>
+
+struct ListNode {
+    int val;
+    ListNode *next;
+    ListNode(int x) : val(x), next(nullptr) {}
+};
+
+bool hasCycle(ListNode *head) {
+    if (!head) return false;
+
+    ListNode *slow = head;
+    ListNode *fast = head;
+
+    while (fast && fast->next) {
+        slow = slow->next;          // Move slow pointer by 1 step
+        fast = fast->next->next;   // Move fast pointer by 2 steps
+
+        if (slow == fast) {         // Cycle detected
+            return true;
+        }
+    }
+
+    return false;  // No cycle found
+}
+
+int main() {
+    // Example usage
+    ListNode *head = new ListNode(3);
+    head->next = new ListNode(2);
+    head->next->next = new ListNode(0);
+    head->next->next->next = new ListNode(-4);
+    
+    // Creating a cycle for testing
+    head->next->next->next->next = head->next; // Cycle here (pointing to node with value 2)
+
+    if (hasCycle(head)) {
+        std::cout << "The linked list has a cycle." << std::endl;
+    } else {
+        std::cout << "The linked list does not have a cycle." << std::endl;
+    }
+
+    // Cleanup memory if needed (not in this simple example)
+    return 0;
+}
