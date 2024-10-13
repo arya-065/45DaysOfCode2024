@@ -1,0 +1,46 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+void nextPermutation(std::vector<int>& nums) {
+    // Step 1: Find the largest index i such that nums[i] < nums[i + 1]
+    int i = nums.size() - 2;
+    while (i >= 0 && nums[i] >= nums[i + 1]) {
+        i--;
+    }
+
+    // Step 2: If such an index exists, find the largest index j greater than i
+    // such that nums[i] < nums[j]
+    if (i >= 0) {
+        int j = nums.size() - 1;
+        while (nums[j] <= nums[i]) {
+            j--;
+        }
+        // Step 3: Swap nums[i] with nums[j]
+        std::swap(nums[i], nums[j]);
+    }
+
+    // Step 4: Reverse the sequence from nums[i + 1] to the end
+    std::reverse(nums.begin() + i + 1, nums.end());
+}
+
+int main() {
+    // Example usage
+    std::vector<int> arr = {1, 2, 3};
+    
+    std::cout << "Current permutation: ";
+    for (int num : arr) {
+        std::cout << num << " ";
+    }
+    std::cout << std::endl;
+
+    nextPermutation(arr);
+
+    std::cout << "Next permutation: ";
+    for (int num : arr) {
+        std::cout << num << " ";
+    }
+    std::cout << std::endl;
+
+    return 0;
+}
