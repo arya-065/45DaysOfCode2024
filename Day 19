@@ -1,0 +1,30 @@
+#include <iostream>
+
+using namespace std;
+
+bool canAchieveScore(int N, int X, int Y) {
+    // The maximum score Chef can achieve is N * X
+    int maxScore = N * X;
+
+    // Chef can achieve exactly Y marks if Y is a multiple of X
+    // and also Y does not exceed the maximum score.
+    return (Y % X == 0) && (Y <= maxScore);
+}
+
+int main() {
+    int T;
+    cin >> T; // Number of test cases
+
+    while (T--) {
+        int N, X, Y;
+        cin >> N >> X >> Y; // Read N, X, Y for each test case
+        
+        if (canAchieveScore(N, X, Y)) {
+            cout << "YES\n"; // It's possible to achieve exactly Y marks
+        } else {
+            cout << "NO\n"; // It's not possible
+        }
+    }
+
+    return 0;
+}
