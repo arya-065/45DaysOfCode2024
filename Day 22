@@ -1,0 +1,53 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+void backtrack(std::vector<int>& candidates, int target, std::vector<int>& current, std::vector<std::vector<int>>& result, int start) {
+    if (target == 0) {
+        result.push_back(current);
+        return;
+    }
+    
+    for (int i = start; i < candidates.size(); ++i) {
+        if (candidates[i] > target) {
+            // If the candidate exceeds the target, no point in continuing
+            break;
+        }
+        
+        // Choose the candidate
+        current.push_back(candidates[i]);
+        // Explore further with the same candidate (unlimited usage)
+        backtrack(candidates, target - candidates[i], current, result, i);
+        // Backtrack: remove the candidate
+        current.pop_back();
+    }
+}
+
+std::vector<std::vector<int>> combinationSum(std::vector<int>& candidates, int target) {
+    std::vector<std::vector<int>> result;
+    std::vector<int> current;
+    
+    // Sort the candidates to facilitate the early stopping in backtrack
+    std::sort(candidates.begin(), candidates.end());
+    
+    backtrack(candidates, target, current, result, 0);
+    return result;
+}
+
+int main() {
+    std::vector<int> candidates = {2, 3, 6, 7};
+    int target = 7;
+
+    std::vector<std::vector<int>> combinations = combinationSum(candidates, target);
+    
+    std::cout << "Unique combinations that sum to " << target << ":\n";
+    for (const auto& combination : combinations) {
+        std::cout << "[ ";
+        for (int num : combination) {
+            std::cout << num << " ";
+        }
+        std::cout << "]\n";
+    }
+
+    return 0;
+}
