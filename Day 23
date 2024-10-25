@@ -1,0 +1,30 @@
+#include <iostream>
+#include <string>
+
+std::string removeOccurrences(const std::string& s, const std::string& part) {
+    std::string result = s;
+    size_t pos;
+
+    // Continuously find and remove the substring until none is left
+    while ((pos = result.find(part)) != std::string::npos) {
+        result.erase(pos, part.length());
+    }
+
+    return result;
+}
+
+int main() {
+    std::string s, part;
+
+    // Input the original string and the substring to remove
+    std::cout << "Enter the original string (s): ";
+    std::getline(std::cin, s);
+    std::cout << "Enter the substring to remove (part): ";
+    std::getline(std::cin, part);
+
+    // Remove occurrences and print the result
+    std::string result = removeOccurrences(s, part);
+    std::cout << "Resulting string after removal: " << result << std::endl;
+
+    return 0;
+}
