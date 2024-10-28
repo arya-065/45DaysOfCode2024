@@ -1,0 +1,35 @@
+#include <iostream>
+
+class Solution {
+public:
+    int uniquePaths(int m, int n) {
+        // Calculate the number of unique paths using the combinatorial approach
+        long long paths = 1;
+        int N = m + n - 2; // Total moves
+        int r = m - 1;     // Moves down
+
+        // Calculate C(N, r) = N! / (r! * (N - r)!)
+        for (int i = 1; i <= r; ++i) {
+            paths = paths * (N - (r - i + 1)) / i;
+        }
+        
+        return static_cast<int>(paths);
+    }
+};
+
+int main() {
+    Solution solution;
+    int m, n;
+    
+    // Input dimensions of the grid
+    std::cout << "Enter the number of rows (m): ";
+    std::cin >> m;
+    std::cout << "Enter the number of columns (n): ";
+    std::cin >> n;
+
+    // Output the number of unique paths
+    int result = solution.uniquePaths(m, n);
+    std::cout << "Number of unique paths from top-left to bottom-right: " << result << std::endl;
+
+    return 0;
+}
