@@ -1,0 +1,19 @@
+def rearrange_array(A):
+    A.sort()
+    n = len(A)
+    result = [0] * n
+    
+    left, right = 0, n - 1
+    for i in range(n):
+        if i % 2 == 0:  # even index
+            result[i] = A[left]
+            left += 1
+        else:           # odd index
+            result[i] = A[right]
+            right -= 1
+    
+    return result
+
+# Example usage:
+A = [3, 5, 2, 8, 6]
+print(rearrange_array(A))
