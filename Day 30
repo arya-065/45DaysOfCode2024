@@ -1,0 +1,28 @@
+def min_operations_to_permutation(A):
+    N = len(A)
+    freq = [0] * (N + 1)
+    
+    for num in A:
+        if num < 1 or num > N:
+            return -1  # Impossible to form a valid permutation
+        freq[num] += 1
+    
+    excess = 0
+    missing = 0
+    
+    for i in range(1, N + 1):
+        if freq[i] == 0:
+            missing += 1  # Count missing numbers
+        elif freq[i] > 1:
+            excess += freq[i] - 1  # Count excess numbers
+    
+    # The number of operations required is equal to the number of missing values
+    # If we have enough excess values to fill all missing ones, return the count
+    if excess >= missing:
+        return missing
+    else:
+        return -1  # Not enough excess to fill all missing
+
+# Example Usage
+A = [3, 1, 2, 2]
+print(min_operations_to_permutation(A))  # Output: 1
