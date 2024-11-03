@@ -1,0 +1,55 @@
+def sieve_of_eratosthenes(max_num):
+    """ Generate a list of prime numbers up to max_num using the Sieve of Eratosthenes """
+    is_prime = [True] * (max_num + 1)
+    p = 2
+    while (p * p <= max_num):
+        if is_prime[p]:
+            for i in range(p * p, max_num + 1, p):
+                is_prime[i] = False
+        p += 1
+    return [p for p in range(2, max_num + 1) if is_prime[p]]
+
+def segmented_sieve(m, n):
+    """ Generate primes in the range [m, n] using the segmented sieve method """
+    limit = int(n**0.5) + 1
+    primes = sieve_of_eratosthenes(limit)
+    
+    # Create a boolean array for the range m to n
+    is_prime_range = [True] * (n - m + 1)
+    
+    # Mark non-primes in the range [m, n]
+    for prime in primes:
+        # Find the minimum number in the [m, n] range that is a multiple of prime
+        start = max(prime * prime, m + (prime - m % prime) % prime)
+        for j in range(start, n + 1, prime):
+            is_prime_range[j - m] = False
+
+    # Collecting the primes in the range [m, n]
+    primes_in_range = []
+    for i in range(n - m + 1):
+        if is_prime_range[i] and (i + m) > 1:  # Exclude 1 from primes
+            primes_in_range.append(i + m)
+    
+    return primes_in_range
+
+def main():
+    import sys
+    input = sys.stdin.read
+    data = input().splitlines()
+    
+    t = int(data[0])
+    results = []
+    
+    for i in range(1, t + 1):
+        m, n = map(int, data[i].split())
+        primes = segmented_sieve(m, n)
+        results.append(primes)
+    
+    # Output the results with the required format
+    output = []
+    for primes in results:
+        output.append('\n'.join(map(str, primes)))
+    print('\n\n'.join(output))
+
+if __name__ == "__main__":
+    main()
