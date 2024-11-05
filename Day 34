@@ -1,0 +1,19 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int A, B;
+    cin >> A >> B;  // Read the two drawn numbers A and B
+    
+    // Calculate the third number C required to make the sum 21
+    int C = 21 - (A + B);
+    
+    // Check if C is within the valid range [1, 10]
+    if (C >= 1 && C <= 10) {
+        cout << C << endl;  // Output the valid third number
+    } else {
+        cout << -1 << endl; // Output -1 if it's not a valid number
+    }
+    
+    return 0;
+}
