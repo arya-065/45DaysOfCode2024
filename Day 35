@@ -1,0 +1,16 @@
+# Read the number of test cases
+T = int(input())
+
+# Process each test case
+for _ in range(T):
+    # Read X, A, and B for this test case
+    X, A, B = map(int, input().split())
+    
+    # Calculate the total score Chef earned
+    total_score = A + 2 * B
+    
+    # Check if Chef qualifies
+    if total_score >= X:
+        print("Qualify")
+    else:
+        print("NotQualify")
