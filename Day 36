@@ -1,0 +1,28 @@
+#include <iostream>
+using namespace std;
+
+int countTuesdays(int N) {
+    // The first Tuesday is on day 2
+    int firstTuesday = 2;
+
+    // If N is less than 2, no Tuesdays can occur
+    if (N < firstTuesday) {
+        return 0;
+    } else {
+        // Calculate the number of Tuesdays that fit within N days
+        return (N - firstTuesday) / 7 + 1;
+    }
+}
+
+int main() {
+    int N;
+    
+    // Input the number of days until Halloween
+    cout << "Enter the number of days left until Halloween: ";
+    cin >> N;
+    
+    // Output the number of Tuesdays Dracula can enjoy
+    cout << "Dracula can enjoy his favorite Tuesday menu " << countTuesdays(N) << " times." << endl;
+    
+    return 0;
+}
