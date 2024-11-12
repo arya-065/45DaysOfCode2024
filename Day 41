@@ -1,0 +1,23 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int T;
+    cin >> T; // Read number of test cases
+
+    while (T--) {
+        int X, Y;
+        cin >> X >> Y; // Read geyser capacity X and bucket capacity Y
+
+        // Calculate the number of full buckets that can be filled
+        int total_buckets = X / Y;
+
+        // Each person requires 2 buckets
+        int max_people = total_buckets / 2;
+
+        // Output the result for the current test case
+        cout << max_people << endl;
+    }
+
+    return 0;
+}
