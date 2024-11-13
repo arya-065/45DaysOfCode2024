@@ -1,0 +1,51 @@
+#include <iostream>
+#include <vector>
+#include <string>
+#include <algorithm>
+
+using namespace std;
+
+// Helper function to check if two words are anagrams
+bool areAnagrams(const string& word1, const string& word2) {
+    string sorted_word1 = word1;
+    string sorted_word2 = word2;
+    sort(sorted_word1.begin(), sorted_word1.end());
+    sort(sorted_word2.begin(), sorted_word2.end());
+    return sorted_word1 == sorted_word2;
+}
+
+vector<string> deleteAnagrams(vector<string>& words) {
+    int n = words.size();
+    if (n < 2) return words; // No operation needed if there are less than two words
+
+    vector<string> result;
+    result.push_back(words[0]); // Add the first word to result
+
+    for (int i = 1; i < n; ++i) {
+        // Check if the current word is an anagram of the last word in the result
+        if (areAnagrams(result.back(), words[i])) {
+            // Skip adding this word to the result
+            continue;
+        }
+        // Otherwise, add the current word to the result
+        result.push_back(words[i]);
+    }
+
+    return result;
+}
+
+int main() {
+    // Example input
+    vector<string> words = {"abb", "bba", "abc", "def", "fed", "ghi"};
+
+    // Perform the operations and get the result
+    vector<string> result = deleteAnagrams(words);
+
+    // Output the result
+    for (const string& word : result) {
+        cout << word << " ";
+    }
+    cout << endl;
+
+    return 0;
+}
