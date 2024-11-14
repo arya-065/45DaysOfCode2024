@@ -1,0 +1,18 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int main() {
+    string name;
+    int age;
+
+    // Ask for user's name and age
+    cout << "Enter your name: ";
+    getline(cin, name);
+    
+    cout << "Enter your age: ";
+    cin >> age;
+
+    // Calculate the age in dog years
+   
