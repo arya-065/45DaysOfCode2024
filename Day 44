@@ -1,0 +1,26 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int N, A, B;
+    // Input the values of N, A, B
+    cin >> N >> A >> B;
+    
+    int total_duration = 0;
+    
+    // Loop through the episodes from 1 to N
+    for (int i = 1; i <= N; ++i) {
+        if (i % 2 == 0) {
+            // If the episode index is even, add A minutes
+            total_duration += A;
+        } else {
+            // If the episode index is odd, add B minutes
+            total_duration += B;
+        }
+    }
+    
+    // Output the total duration
+    cout << total_duration << endl;
+    
+    return 0;
+}
