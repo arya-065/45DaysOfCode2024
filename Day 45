@@ -1,0 +1,20 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int N;
+    cin >> N;
+
+    // Number of complete cycles of 5 gifts
+    int x = N / 5;
+
+    // Remaining gifts after full cycles
+    int r = N % 5;
+
+    // Total coins Chef needs to pay
+    int coins = 4 * x + r;
+
+    cout << coins << endl;
+
+    return 0;
+}
