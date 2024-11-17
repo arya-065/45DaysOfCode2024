@@ -1,0 +1,31 @@
+#include <iostream>
+#include <vector>
+#include <cmath> // For ceil function
+#include <algorithm> // For max function
+
+using namespace std;
+
+int main() {
+    int N, X;
+    cin >> N >> X;
+    
+    vector<int> health(N);
+    
+    for (int i = 0; i < N; ++i) {
+        cin >> health[i];
+    }
+    
+    // Calculate time for Single-Target Mode
+    int singleTargetTime = 0;
+    for (int i = 0; i < N; ++i) {
+        singleTargetTime += (health[i] + X - 1) / X; // This is equivalent to ceil(health[i] / X)
+    }
+    
+    // Calculate time for Multi-Target Mode
+    int multiTargetTime = *max_element(health.begin(), health.end());
+    
+    // Output the minimum time
+    cout << min(singleTargetTime, multiTargetTime) << endl;
+    
+    return 0;
+}
